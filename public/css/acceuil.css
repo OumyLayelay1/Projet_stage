@@ -1,0 +1,122 @@
+body{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.maliste{
+    color: darkslategray !important;
+}
+.maliste:hover{
+    border-bottom: 2px solid rgb(240, 13, 168);
+    letter-spacing: 1.5px;
+}
+li{
+    list-style: none;
+}
+.grd-container{
+    background-color: #fff;
+    box-shadow: 0px 2px 17px #8f8888;
+}
+.pt-custom{
+    padding-top: 3rem;
+}
+.unemenu{
+    margin-left: 5%;
+}
+.form-inline{
+    margin-left: 3%;
+}
+.text1{
+    top: 40%;
+    left: 24%;
+}
+.pop{
+    color: darkslategray;
+}
+.ici{
+    background-color: darkslategray;
+    border: solid darkslategray;
+    margin-left: -14%;
+}
+.ici :hover{
+    color: bisque;
+}
+.nav-item{
+    margin: 6%;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.title{
+    text-transform: uppercase;
+    padding-top: 10% !important;
+    text-align: center;
+}
+.figma{
+    width: 47%;
+}
+.text-para{
+    padding-top: 4%;
+    text-align: center;
+}
+.img1{
+    margin-left: 2%;
+}
+.plan{
+    margin-left: 8%;
+}
+.organise{
+    text-decoration: none;
+}
+.description{
+    text-align: center;
+    width: 62%;
+    margin-left: 19%;
+    padding-top: 3%;
+}
+.voir{
+    background-color: darkslategray;
+    border: solid darkslategray;
+    margin-left: 46%;
+    color: white;
+}
+.voir:hover{
+    color: bisque;
+}
+.galsen{
+    font-size: 13px;
+    letter-spacing: 1.5px;
+}
+.senegal{
+    background-color: bisque;
+}
+.envoie{
+    background-color: #fff;
+    border: solid #fff;
+    color: darkslategrey;
+}
+.envoie:hover{
+    color: green;
+}
+.term{
+    padding: 6px;
+}
+.container-foot{
+    background-color: #d684a6;
+}
+.commentair{
+    border-bottom: 1px solid darkslategrey;
+}
+.text-carousel{
+    margin-top: -46%;
+    margin-left: -14%;
+}
+.text-carousell{
+    margin-top: -57%;
+    margin-left: 45%;
+}
+.propos{
+    background-color: #fff;
+    padding: 2%;
+}
+.apropos{
+    background-color: bisque;
+    padding: 2%;
+}
