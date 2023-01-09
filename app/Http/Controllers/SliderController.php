@@ -89,7 +89,8 @@ class SliderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+
+ public function update(Request $request, $id)
     {
         $slider = Slider::find($id);
         $existingFilePath = $slider->slider_image;
@@ -101,7 +102,6 @@ class SliderController extends Controller
             $destination = public_path(). '/uploads/sliders/';
             if($file->move($destination, $filename)){
                 $input['slider_image'] = '/uploads/sliders/'. $filename;
-                //unset(public_path().$existingFilePath);
             }
         }else{
             $input = $request->except(['_token', 'slider_image']);
@@ -109,7 +109,9 @@ class SliderController extends Controller
 
         $slider->update($input);
         return redirect(route('sliders.index'));
+
     }
+    
 
     /**
      * Remove the specified resource from storage.
@@ -119,8 +121,9 @@ class SliderController extends Controller
      */
     public function destroy($id)
     {
-        $sliders = Slider::find($id);
+        $sliders = Slider::findOrFail($id);
         $sliders->delete();
-        return redirect('sliders');
+
+        return response()->json(['status'=>"La suppression s'est correctement passée"]);
     }
 }

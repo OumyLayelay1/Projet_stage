@@ -21,12 +21,13 @@
                             @if(!$sliders->isEmpty())
                                 @foreach($sliders as $item)
                                     <tr>
+                                        <input type="hidden" class="serdelete_val__id" value="{{$item->id}}">
                                         <td>{{$item->id}}</td>
                                         <td>{{$item->slider_label}}</td>
                                         <td>
                                             <img width="60" height="60" src="{{ asset($item->slider_image) }}" alt="Image">
                                         </td>
-                                        <td><a href="{{url('frontend.destination'.$item->id.'/create')}}" class="btn btn-reserve">Par ici</a></td>
+                                        <td><a href="{{url('frontend.destination', $item->id)}}" class="btn btn-reserve">Par ici</a></td>
                                         <td>
                                             {!! Form::open(['route' => ['sliders.destroy', $item->id], 'method' => 'delete']) !!}
                                                 <a href="{{ route('sliders.show', $item->id) }}">
@@ -35,7 +36,7 @@
                                                 <a href="{{ route('sliders.edit', $item->id) }}">
                                                     <i class="fa-solid fa-pen"></i>
                                                 </a>
-                                                {!! Form::button('<i class="fa-solid fa-trash"></i>', ['class' => 'text-danger', 'type' => 'submit']) !!}
+                                                {!! Form::button('<i class="fa-solid fa-trash"></i>', ['class' => 'text-danger servideletebtn', 'type' => 'button']) !!}
                                             {!! Form::close() !!}
                                             
                                         </td>
@@ -54,5 +55,49 @@
         </div>  
     </div>
 
+@endsection
+@section("scripts")
+
+    <script>
+        $(document).ready(function(){
+            $('.servideletebtn').click(function(e){
+                e.preventDefault();
+
+                var delete_id = $(this).closest("tr").find('.serdelete_val__id').val();
+
+                swal({
+                    title: "Êtes-vous sûr(e)?",
+                    text: "Une fois supprimé, vous ne pourrez plus récupérer ce fichier à nouveau!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                    if (willDelete) {
+
+                        var data = {
+                            "_token": $('input[name=_token]').val(),
+                            "id": delete_id,
+                        }
+                        $.ajax({
+                            type: "DELETE",
+                            url: '/sliders/'+delete_id,
+                            data: data,
+                            success: function (response) {
+                                swal(response.status, {
+                                    icon: "success",
+                                })
+                                .then((result) => {
+                                    location.reload();
+                                });
+                            }
+                        })
+                    } 
+                });
+            });
+        });
+        
+         
+    </script>
 
 @endsection

@@ -25,10 +25,10 @@
                              @method('PUT')
                              
                             <div class="mb-3">
-                            <label for="image_restaurant" class="form-label">Image</label>
+                                <label for="image_restaurant" class="form-label">Image</label>
                                 <input type="file" name="image_restaurant" class="form-control" id="image_restaurant" placeholder="">
                                 <div class="img-preview">
-                                    <img width="100" height="100" src="{{ asset($resto->image_restaurant) }}" alt="images">
+                                    <img class="image-create" src="{{ asset($resto->image_restaurant) }}" alt="images">
                                 </div>
                             </div>
                             <div class="mb-3">

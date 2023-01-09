@@ -20,7 +20,7 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="{{route('galleri_images.update', $galleri_image->id)}}" method="POST">
+                        <form enctype="multipart/form-data" action="{{route('galleri_images.update', $galleri_image->id)}}" method="POST">
                              @csrf
                              @method('PUT')
 

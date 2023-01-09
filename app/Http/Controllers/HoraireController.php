@@ -15,6 +15,8 @@ class HoraireController extends Controller
      */
     public function index()
     {
+        $now = now();
+        $today = today(); 
         $horaires = Horaire::orderBy('id', 'desc')
                     ->get();
         return view('backend.horaires.index', compact('horaires'));
@@ -42,7 +44,7 @@ class HoraireController extends Controller
         $this->validate($request, [
             'resto_id' => 'required',
             'jour' => 'required'
-        ], [
+        ], [                                                                                    
             'resto_id.required' => "Le champ resto est requis",
             'jour.required' => "Le champ jour est requis",
         ]);
@@ -51,7 +53,9 @@ class HoraireController extends Controller
         
         $horaire = Horaire::create($input);
         return redirect(route('horaires.index'));
+
     }
+
 
     /**
      * Display the specified resource.
@@ -98,10 +102,11 @@ class HoraireController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $horaires = Horaire::find($id);
         $horaires->delete();
-        return redirect('horaires');
+
+        return response()->json(['status'=>"La suppression s'est correctement passée"]);
     }
 }

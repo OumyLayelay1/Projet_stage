@@ -45,7 +45,7 @@ class CountryController extends Controller
         if($request->hasFile('images')){
             $file = $request->file('images');
             $extension = $file->getClientOriginalExtension();
-            $filename = time(). '.' .$extension;
+            $filename = uniqid(). '.' .$extension;
             $destination = public_path(). '/uploads/countries';
             if($file->move("uploads/countries/", $filename)){
                 $input['images'] = '/uploads/countries/'. $filename;
@@ -56,13 +56,12 @@ class CountryController extends Controller
         if($request->hasFile('image_capital')){
             $file = $request->file('image_capital');
             $extension = $file->getClientOriginalExtension();
-            $filename2 = time(). '.' .$extension;
-            $destination = public_path(). '/uploads/countries';
-            if($file->move("uploads/countries/", $filename2)){
-                $input['image_capital'] = '/uploads/countries/'. $filename2;
+            $filename = uniqid(). '.' .$extension;
+            if($file->move("uploads/countries/", $filename)){
+                $input['image_capital'] = '/uploads/countries/'. $filename;
             }
         }
-        
+       // return dd(['filename'=>$filename,'destination'=>$destination,'filename2'=>$filename2,'destination2'=>$destination2]);
         $country = Country::create($input);
         return redirect(route('countries.index'));
     }
@@ -104,18 +103,29 @@ class CountryController extends Controller
         $existingFilePath = $country->images;
         $existingFilePath = $country->image_capital;
         
-        if($request->hasFile('images','image_capital')){
-            $file = $request->file('images','image_capital');
+        if($request->hasFile('images')){
+            $file = $request->file('images');
             $extension = $file->getClientOriginalExtension();
-            $filename = time(). '.' .$extension;
+            $filename = uniqid(). '.' .$extension;
             $destination = public_path(). '/uploads/countries';
             if($file->move("uploads/countries/", $filename)){
-                $input['images , image_capital'] = '/uploads/countries/'. $filename;
+                $input['images' ] = '/uploads/countries/'. $filename;
             }
         }else{
-            $input = $request->except(['_token', 'images', 'image_capital']);
+            $input = $request->except(['_token', 'images']);
         }
 
+        if($request->hasFile('image_capital')){
+            $file = $request->file('image_capital');
+            $extension = $file->getClientOriginalExtension();
+            $filename = uniqid(). '.' .$extension;
+            if($file->move("uploads/countries/", $filename)){
+                $input['image_capital'] = '/uploads/countries/'. $filename;
+            }
+        }else{
+            $input = $request->except(['_token', 'image_capital']);
+        }
+        
         $country->update($input);
         return redirect(route('countries.index'));
     }
@@ -128,9 +138,10 @@ class CountryController extends Controller
      */
     public function destroy($id)
     {
-        $countries = Country::find($id);
+        $countries = Country::findOrFail($id);
         $countries->delete();
-        return redirect('countries');
+        
+        return response()->json(['status'=>"La suppression s'est correctement passée"]);
     }
 
    /*  public function view(Request $request){

@@ -37,12 +37,12 @@
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="heure_ouverture" class="form-label">Heure ouverture</label>
-                                <input value="{{ $horaire->heure_ouverture }}" type="time" name="heure_ouverture" class="form-control" id="heure_ouverture" placeholder="">
+                                <label for="heure_ouvertur" class="form-label">Heure ouverture</label>
+                                <input value="{{ $horaire->heure_ouvertur }}" type="time" name="heure_ouvertur" class="form-control" id="heure_ouvertur" placeholder="">
                             </div>
                             <div class="mb-3">
-                                <label for="heure_fermeture" class="form-label">Heure fermeture</label>
-                                <input value="{{ $horaire->heure_fermeture }}" type="time" name="heure_fermeture" class="form-control" id="heure_fermeture" placeholder="">
+                                <label for="heure_fermetur" class="form-label">Heure fermeture</label>
+                                <input value="{{ $horaire->heure_fermetur }}" type="time" name="heure_fermetur" class="form-control" id="heure_fermetur" placeholder="">
                             </div>
                             <div class="mb-3">Fermé: 
                                 <label for="is_closed" class="form-label">Oui</label>

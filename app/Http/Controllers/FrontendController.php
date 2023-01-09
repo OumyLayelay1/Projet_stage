@@ -10,7 +10,9 @@ use App\Models\Loger;
 use App\Models\GalleriImage;
 use App\Models\Slider;
 use App\Models\Country;
-
+use App\Models\Divertir;
+use App\Models\Cadeau;
+use App\Models\Bouger;
 
 class FrontendController extends Controller
 {
@@ -18,8 +20,10 @@ class FrontendController extends Controller
         $sliders = Slider::orderBy('id', 'desc')
                     ->get();
         $countries = Country::orderBy('id', 'desc')
-                    ->get();              
-        return view('frontend.accueil',compact('countries','sliders'));
+                    ->get();  
+        $galleri_images = GalleriImage::orderBy('id', 'desc')
+                    ->get();           
+        return view('frontend.accueil',compact('countries','sliders','galleri_images'));
     }
     public function destination(){
         $countries = Country::orderBy('id', 'desc')
@@ -27,11 +31,21 @@ class FrontendController extends Controller
         return view('frontend.destination',compact('countries'));
     }                               
     public function pays(){
+        $bougers = Bouger::orderBy('id', 'desc')
+                    ->get();
+        $countries = Country::orderBy('id', 'desc')
+                    ->get();
         $restos = Resto::orderBy('id', 'desc')
                     ->get();
         $logers = Loger::orderBy('id', 'desc')
+                    ->get(); 
+        $divertirs = Divertir::orderBy('id', 'desc')
+                    ->get();       
+        $cadeaus = Cadeau::orderBy('id', 'desc')
+                    ->get(); 
+        $galleri_images = GalleriImage::orderBy('id', 'desc')
                     ->get();                                 
-        return view('frontend.pays', compact('restos','logers'));
+        return view('frontend.pays', compact('restos','logers','countries','divertirs','cadeaus','bougers','galleri_images'));
     }  
     public function contact(){
         return view('frontend.contact');
@@ -40,7 +54,9 @@ class FrontendController extends Controller
         return view('frontend.langue');
     }
     public function marche(){
-        return view('frontend.localisation-marche');
+        $cadeaus = Cadeau::orderBy('id', 'desc')
+                    ->get();  
+        return view('frontend.localisation-marche', compact('cadeaus'));
     }
     public function resto(){
         $restos = Resto::orderBy('id', 'desc')

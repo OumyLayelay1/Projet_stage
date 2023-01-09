@@ -35,15 +35,15 @@
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="heure_ouverture" class="form-label">Heure ouverture</label>
-                                <input type="time" name="heure_ouverture" class="form-control" id="heure_ouverture" placeholder="">
+                                <label for="heure_ouvertur" class="form-label">Heure ouverture</label>
+                                <input type="time" name="heure_ouvertur" class="form-control" id="heure_ouvertur" placeholder="">
                             </div>
                             <div class="mb-3">
-                                <label for="heure_fermeture" class="form-label">Heure fermeture</label>
-                                <input type="time" name="heure_fermeture" class="form-control" id="heure_fermeture" placeholder="">
+                                <label for="heure_fermetur" class="form-label">Heure fermeture</label>
+                                <input type="time" name="heure_fermetur" class="form-control" id="heure_fermetur" placeholder="">
                             </div>
-                            <div class="mb-3">Fermé: 
-                                <label for="is_closed" class="form-label">Oui</label>
+                            <div class="mb-3"> 
+                                <label for="is_closed" class="form-label">Yes</label>
                                 <input type="radio" name="is_closed" class="form-control" id="is_closed" placeholder="">
                                 <label for="is_closed" class="form-label">Non</label>
                                 <input type="radio" name="is_closed" class="form-control" id="is_closed" placeholder="">

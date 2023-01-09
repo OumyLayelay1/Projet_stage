@@ -124,8 +124,9 @@ class CadeauController extends Controller
      */
     public function destroy($id)
     {
-        $cadeaus = Cadeau::find($id);
+        $cadeaus = Cadeau::findOrFail($id);
         $cadeaus->delete();
-        return redirect('cadeaus');
+
+        return response()->json(['status'=>"La suppression s'est correctement passée"]);
     }
 }

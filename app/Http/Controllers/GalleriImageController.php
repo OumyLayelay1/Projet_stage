@@ -15,10 +15,10 @@ class GalleriImageController extends Controller
      */
     public function index()
     {
-        /* $galleri_images = GalleriImage::table('galleri_images') 
-                ->inRandomOrder() 
-                ->limit(4) 
-                ->get();  */
+        $galleri_images = GalleriImage::select(all)
+                ->take(4)
+                ->get();
+       
         $galleri_images = GalleriImage::orderBy('id', 'desc')
                         ->get();
         return view('backend.galleri_images.index', compact('galleri_images'));
@@ -126,10 +126,14 @@ class GalleriImageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+   
+
+    public function destroy(Request $request, $id)
     {
-        $galleri_images = GalleriImage::find($id);
+        $galleri_images = GalleriImage::findOrFail($id);
         $galleri_images->delete();
-        return redirect('galleri_images');
+
+        return response()->json(['status'=>"La suppression s'est correctement passée"]);
     }
+
 }

@@ -19,6 +19,7 @@
                             @if(!$contactes->isEmpty())
                                 @foreach($contactes as $item)
                                     <tr>
+                                        <input type="hidden" class="serdelete_val__id" value="{{$item->id}}">
                                         <td>{{$item->id}}</td>
                                         <td>{{$item->last_name}}</td>
                                         <td>{{$item->first_name}}</td>
@@ -29,7 +30,7 @@
                                                 <a href="{{ route('contactes.show', $item->id) }}">
                                                     <i class="fa-regular fa-eye"></i>
                                                 </a>
-                                                {!! Form::button('<i class="fa-solid fa-trash"></i>', ['class' => 'text-danger', 'type' => 'submit']) !!}
+                                                {!! Form::button('<i class="fa-solid fa-trash"></i>', ['class' => 'text-danger servideletebtn', 'type' => 'submit']) !!}
                                             {!! Form::close() !!}
                                             
                                         </td> 
@@ -47,5 +48,49 @@
         </div>  
     </div>
 
+@endsection
+@section("scripts")
+
+    <script>
+        $(document).ready(function(){
+            $('.servideletebtn').click(function(e){
+                e.preventDefault();
+
+                var delete_id = $(this).closest("tr").find('.serdelete_val__id').val();
+
+                swal({
+                    title: "Êtes-vous sûr(e)?",
+                    text: "Une fois supprimé, vous ne pourrez plus récupérer ce fichier à nouveau!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                    if (willDelete) {
+
+                        var data = {
+                            "_token": $('input[name=_token]').val(),
+                            "id": delete_id,
+                        }
+                        $.ajax({
+                            type: "DELETE",
+                            url: '/contactes/'+delete_id,
+                            data: data,
+                            success: function (response) {
+                                swal(response.status, {
+                                    icon: "success",
+                                })
+                                .then((result) => {
+                                    location.reload();
+                                });
+                            }
+                        })
+                    } 
+                });
+            });
+        });
+        
+         
+    </script>
 
 @endsection

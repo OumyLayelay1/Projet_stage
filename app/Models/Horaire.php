@@ -12,8 +12,8 @@ class Horaire extends Model
     protected $table = 'horaires';
     public $fillable = [
         'jour',
-        'heure_ouverture',
-        'heure_fermeture',
+        'heure_ouvertur',
+        'heure_fermetur',
         'is_closed',
         "resto_id"
     ];

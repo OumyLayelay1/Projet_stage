@@ -17,7 +17,7 @@
                         @endif
                         
                     <div class="entete">
-                        <h3 class="text-light entete-1">Show Slider
+                        <h3 class="text-light entete-1">Create Slider
                             <a href="{{url('sliders')}}" class="btn btn-light">Retour</a>
                         </h3> 
                     </div>

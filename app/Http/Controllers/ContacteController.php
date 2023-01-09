@@ -83,8 +83,9 @@ class ContacteController extends Controller
      */
     public function destroy($id)
     {
-        $contactes = Contacte::find($id);
+        $contactes = Contacte::findOrFail($id);
         $contactes->delete();
-        return redirect('contactes');
+
+        return response()->json(['status'=>"La suppression s'est correctement passée"]);
     }
 }

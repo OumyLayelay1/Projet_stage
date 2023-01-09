@@ -10,11 +10,13 @@
                             <a href="{{url('countries')}}" class="btn btn-light">Retour</a>
                         </h3> 
                     </div>
-                    <h1 class="">Gestion du restaurant</h1>
+                    <h1 class="">Gestion du Country</h1>
                     <table class="container-fluid table table-striped">
                         <tr>
                             <th>Image du pays :</th>
-                            <td>{{ $country->images }}</td>
+                            <td>
+                                <img class="image-show" src="{{ asset($country->images) }}" alt="Image">
+                            </td>
                         </tr>
                         <tr>
                             <th>Nom du pays :</th>
@@ -50,7 +52,9 @@
                         </tr>
                         <tr>
                             <th>Image du capital</th>
-                            <td>{{ $country->image_capital}}</td>
+                            <td>
+                                <img class="image-show" src="{{ asset($country->image_capital) }}" alt="Image">
+                            </td>
                         </tr>
                         <tr>
                             <th>Nom du capital</th>

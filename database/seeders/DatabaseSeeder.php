@@ -18,5 +18,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             SearchSeeder::class
         ]);
+
+        for ($i = 1; $i < 21; $i++) {
+            DB::table('galleri_images')->insert(['name' => 'GalleriImage ' . $i, 'galleri_image_id' => rand(1, 4)]);
+        }
     }
 }

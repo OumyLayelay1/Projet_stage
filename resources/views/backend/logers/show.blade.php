@@ -14,7 +14,9 @@
                     <table class="container-fluid table table-striped">
                         <tr>
                             <th>Image de l'hôtel :</th>
-                            <td>{{ $loger->image_hotel }}</td>
+                            <td>
+                                <img class="image-show" src="{{ asset($loger->image_hotel) }}" alt="Image">
+                            </td>
                         </tr>
                         <tr>
                             <th>Nom :</th>

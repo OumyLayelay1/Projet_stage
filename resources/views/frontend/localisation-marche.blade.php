@@ -5,7 +5,24 @@
     </header>
     <section class="containerfluid">
         <div class="row container-bottom">
-            <div class="col-md-8 slice"><img src="images/marche.jpg" alt="" class="w-100 slices"></div>
+            @if(!$cadeaus->isEmpty())
+                @foreach($cadeaus as $item)
+                    <div class="col-md-8 slice"><img src="{{ asset($item->image_marche) }}" alt="" class="w-100 slices"></div>
+                    <div class="col-md-4 text-center part-resto">
+                        <h5 class="text-center titre-resto">{{$item->titre_marche}}</h5>
+                        <div class="pt-3 description-resto-local">
+                            <p class="adresse-1">{{$item->address}}</p>
+                            <p class="adresse-1">Coordonnées: {{$item->coordonnee}} </p>
+                            <p class="adresse-1">Site Web: {{$item->site_web}} </p>
+                            <p class="adresse-1">Horaires d'ouverture: <br>lun.: 11:00-23:00 <br>
+                                                Mar.: 11:00-23:00 <br>Mer.: 11:00-23:00 <br>Jeu.: 11:00-23:00 <br>
+                                                Ven.: 11:00-00:00 <br>Sam.: 12:00-00:00 <br>Dim.: Fermé 
+                            </p>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
+            {{-- <div class="col-md-8 slice"><img src="images/marche.jpg" alt="" class="w-100 slices"></div>
             <div class="col-md-4 text-center">
                 <h5 class="text-center titre-resto">Helene K la Boutique</h5>
                 <div class="pt-3 description-resto-local">
@@ -24,8 +41,8 @@
         </div>
         <div class="row">
             <div class="col-md-6"></div>
-            <div class="col-md-6"></div>
-        </div>
+            <div class="col-md-6"></div>--}}
+        </div> 
     </section>
 
 @endsection

@@ -14,7 +14,9 @@
                     <table class="container-fluid table table-striped">
                         <tr>
                             <th>Image :</th>
-                            <td>{{ $galleri_image->image }}</td>
+                            <td>
+                                <img class="image-show" src="{{ asset($galleri_image->image) }}" alt="Image">
+                            </td>
                         </tr>
                         <tr>
                             <th>Pays</th>

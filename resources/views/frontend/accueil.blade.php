@@ -11,7 +11,7 @@
                                 <img src="{{ asset($item->slider_image) }}" class="d-block w-100 avif" alt="...">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h1 class="text-dark text-carousel">{{$item->slider_label}}</span></h1>
-                                    <div class="link"><a href="{{url('destination/'.$item->id.'/create')}}" class="btn btn-reserve">Par ici</a></div>
+                                    <div class="link"><a href="{{route('destination', $item->slider_button_link)}}" class="btn btn-reserve">{{$item->slider_button_link}}</a></div>
                                 </div>
                             </div>  
                         @endforeach
@@ -99,13 +99,24 @@
                     @endforeach
                 @endif  
             </div>
-        </div>
-        
-        
+        </div>       
     </section>
     <section class="container mt-5 img-text mt-5">
         <div class="pt-5 row">
-            <div class="col-md-3 display-flex region">
+            @if(!$galleri_images->isEmpty())
+                @foreach($galleri_images as $item)
+                   
+                        <div class="col-md-3 display-flex region">
+                            <div class="text-center pb-2 img-casa"><img src="{{ asset($item->image) }}" class="w-100 images" alt="...">
+                                <div class="pb-4 text-casa">
+                                    <p class="region-s">{{$item->name}}</p>
+                                    <p class="description">{{$item->description_ville}}</p> 
+                                </div>
+                            </div>
+                        </div>
+                @endforeach
+            @endif  
+            {{-- <div class="col-md-3 display-flex region">
                 <div class="text-center pb-2 img-casa"><img src="images/dkar.jpg" alt="" class="w-100 images">
                     <div class="pb-4 text-casa">
                         <p class="region-s">Dakar</p>
@@ -144,7 +155,7 @@
                         </p>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
         <div class="text-center"><a href="/pays" class="btn w-15 voir">En voir +</a></div>
     </section> 

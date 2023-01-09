@@ -122,8 +122,9 @@ class BougerController extends Controller
      */
     public function destroy($id)
     {
-        $bougers = Bouger::find($id);
+        $bougers = Bouger::findOrFail($id);
         $bougers->delete();
-        return redirect('bougers');
+        return response()->json(['status'=>"La suppression s'est correctement passée"]);
+
     }
 }

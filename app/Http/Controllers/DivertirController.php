@@ -124,8 +124,9 @@ class DivertirController extends Controller
      */
     public function destroy($id)
     {
-        $divertirs = Divertir::find($id);
+        $divertirs = Divertir::findOrFail($id);
         $divertirs->delete();
-        return redirect('divertirs');
+
+        return response()->json(['status'=>"La suppression s'est correctement passée"]);
     }
 }

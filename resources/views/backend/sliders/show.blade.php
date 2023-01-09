@@ -18,11 +18,12 @@
                         </tr>
                         <tr>
                             <th>Image :</th>
-                            <td>{{ $slider->slider_image}}</td>
+                                <img class="image-show" src="{{ asset($slider->slider_image) }}" alt="Image">
+                            </td>
                         </tr>
                         <tr>
                             <th>Lien :</th>
-                            <td>{{ url('destination/'.$slider->id.'/create')}}</td>
+                            <td>{{ url('destination/', $slider->id)}}</td>
                         </tr>
                     </table>
                 </div>

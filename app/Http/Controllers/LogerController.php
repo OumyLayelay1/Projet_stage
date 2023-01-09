@@ -121,8 +121,9 @@ class LogerController extends Controller
      */
     public function destroy($id)
     {
-        $logers = Loger::find($id);
+        $logers = Loger::findOrFail($id);
         $logers->delete();
-        return redirect('logers');
+
+        return response()->json(['status'=>"La suppression s'est correctement passée"]);
     }
 }

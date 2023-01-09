@@ -125,8 +125,8 @@ class RestoController extends Controller
      */
     public function destroy($id)
     {
-        $restos = Resto::find($id);
+        $restos = Resto::findOrFail($id);
         $restos->delete();
-        return redirect(route('restos.index'));
+        return response()->json(['status'=>"La suppression s'est correctement passée"]);
     }
 }

@@ -504,7 +504,7 @@ a{
     background: #F6E3CD;
 }
 .titre-resto{
-    padding-top: 106px;
+    padding-top: 30%;
     color: #a547049c;
 }
 .carousel-item{
@@ -651,10 +651,16 @@ a{
 .cadre-image{
     margin: 20px;
 }
+.text-button{
+    margin-top: 52px;
+    margin-left: -44px;
+}
+
 
 @media all and (min-width: 1024px) and (max-width: 1280px){
     .text-button{
         margin-top: 84px;
+        margin-left: 0px;
     }
 }
 @media (min-width: 320px) and (max-width: 922px){
@@ -681,6 +687,8 @@ a{
     }
     .text-button{
         text-align: center;
+        margin-left: 0px;
+        margin-top: 2px;
     }
     .img-divertir{
         padding-bottom: 13px;

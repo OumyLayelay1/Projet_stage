@@ -23,10 +23,11 @@
                             @if(!$horaires->isEmpty())
                                 @foreach($horaires as $item)
                                     <tr>
+                                        <input type="hidden" class="serdelete_val__id" value="{{$item->id}}">
                                         <td>{{$item->id}}</td>
                                         <td>{{$item->jour}}</td>
-                                        <td>{{$item->heure_ouverture}}</td>
-                                        <td>{{$item->heure_fermeture}}</td>
+                                        <td>{{$item->heure_ouvertur}}</td>
+                                        <td>{{$item->heure_fermetur}}</td>
                                         <td>{{$item->is_closed}}</td>
                                         <td>{{$item->resto_id}}</td>
                                         <td>
@@ -37,7 +38,7 @@
                                                 <a href="{{ route('horaires.edit', $item->id) }}">
                                                     <i class="fa-solid fa-pen"></i>
                                                 </a>
-                                                {!! Form::button('<i class="fa-solid fa-trash"></i>', ['class' => 'text-danger', 'type' => 'submit']) !!}
+                                                {!! Form::button('<i class="fa-solid fa-trash"></i>', ['class' => 'text-danger servideletebtn', 'type' => 'button']) !!}
                                             {!! Form::close() !!}
                                         </td>
                                     </tr>
@@ -55,5 +56,49 @@
         </div>  
     </div>
 
+@endsection
+@section("scripts")
+
+    <script>
+        $(document).ready(function(){
+            $('.servideletebtn').click(function(e){
+                e.preventDefault();
+
+                var delete_id = $(this).closest("tr").find('.serdelete_val__id').val();
+
+                swal({
+                    title: "Êtes-vous sûr(e)?",
+                    text: "Une fois supprimé, vous ne pourrez plus récupérer ce fichier à nouveau!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                    if (willDelete) {
+
+                        var data = {
+                            "_token": $('input[name=_token]').val(),
+                            "id": delete_id,
+                        }
+                        $.ajax({
+                            type: "DELETE",
+                            url: '/horaires/'+delete_id,
+                            data: data,
+                            success: function (response) {
+                                swal(response.status, {
+                                    icon: "success",
+                                })
+                                .then((result) => {
+                                    location.reload();
+                                });
+                            }
+                        })
+                    } 
+                });
+            });
+        });
+        
+         
+    </script>
 
 @endsection

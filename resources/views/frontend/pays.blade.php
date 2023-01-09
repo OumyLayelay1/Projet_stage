@@ -39,35 +39,40 @@
             <div class="row casab">
                 <div class="col-md-8 part1">
                     <div class="row mb-3 part0">
-                        <div class="col-md-4 imgtof"><img src="images/monument.jfif" alt="" class="w-100 tofimg"></div>
-                        <div class="col-md-8 txt">
-                            <h5 class="txtsn">Sénégal</h5>
-                            <p class="txtdesc">
-                                Capitale : Dakar <br>
-                                Langue officielle : Français <br>
-                                Population : 17 738 795 <br>
-                                Hymne National : Le Lion rouge <br>
-                                Monnaie : Franc CFA (XOF) <br>
-                                Fête nationale : 4 avril <br>
-                                Pays frontaliers : <a href="/pays" class="pay">Mauritanie</a>, <a href="/pays" class="pay">Gambie</a>, <a href="/pays" class="pay">Guinée-Bissau</a>, <a href="/pays" class="pay">Guinée</a>, <a href="/pays" class="pay">Mali</a>
-                            </p>
-                        </div>
+                        @if(!$countries->isEmpty())
+                            @foreach($countries as $item)
+                                @if($loop->last)
+                                    <div class="col-md-4 imgtof"><img src="{{ asset($item->images) }}" alt="" class="w-100 tofimg"></div>
+                                    <div class="col-md-8 txt">
+                                        <h5 class="pb-2 txtsn">{{ $item->titre_pays}}</h5>
+                                        <p class="txtdesc">
+                                            Capitale : {{ $item->capital}} <br>
+                                            Langue officielle : {{ $item->langue_officielle}} <br>
+                                            Population : {{ $item->population}} <br>
+                                            Hymne National : {{ $item->hymne_national}} <br>
+                                            Monnaie : {{ $item->monnaie}} <br>
+                                            Fête nationale : {{ $item->fete_national}} <br>
+                                            Pays frontaliers : {{$item->pays_frontalier}}</a>
+                                        </p>
+                                    </div>
+                                @endif
+                            @endforeach
+                        @endif
                     </div>
                     <div class="row part00">
-                        <div class="col-md-4 imgtof"><img src="images/dkar.jpg" alt="" class="w-100 tofimg"></div>
-                        <div class="col-md-8 txt">
-                            <h5 class="txtsn">Dakar</h5>
-                            <p class="txtdesc">
-                                    La capitale du Sénégal, Dakar, sert souvent de point de chute pour visiter le pays mais mérite amplement un séjour
-                                    à elle seule. Chacun de ses quartiers est différent et se 
-                                    découvre avec plaisir à pied ou en taxi. On apprécie 
-                                    l'empreinte française laissée, notamment sur l'île de Gorée 
-                                    qui est très belle. L'aspect cosmopolite de Dakar est aussi à 
-                                    prendre en compte et il se remarque notamment grâce à 
-                                    sa vie nocturne animée. A savoir que Dakar se situe au point 
-                                    le plus occidental du continent africain, sur la presqu'île du Cap-Vert.
-                            </p>
-                        </div>
+                        @if(!$countries->isEmpty())
+                            @foreach($countries as $item)
+                                @if($loop->last)
+                                    <div class="col-md-4 imgtof"><img src="{{ asset($item->image_capital) }}" alt="" class="w-100 tofimg"></div>
+                                    <div class="col-md-8 txt">
+                                        <h5 class="pb-2 txtsn">{{ $item->capital}}</h5>
+                                        <p class="txtdesc">
+                                            {{$item->description_capital}}
+                                        </p>
+                                    </div>
+                                @endif
+                            @endforeach
+                        @endif
                     </div>
                 </div>
                 <div class="col-md-4 pb-3 part2">
@@ -179,7 +184,14 @@
                     </div>
                 </div>
                 <div class="row mt-3 text-casam">
-                   <div class="col-md-6">
+                    @if(!$galleri_images->isEmpty())
+                        @foreach($galleri_images as $item)
+                            <div class="col-md-6">
+                                {{$item->description_ville}}
+                            </div>
+                        @endforeach
+                    @endif
+                   {{-- <div class="col-md-6">
                        <p>
                             Vous partez visiter le Sénégal et vous vous demandez que faire pendant votre séjour ? Découvrez les 14 
                             plus beaux endroits à visiter. Pays d’Afrique de l’Ouest, le Sénégal borde l’Océan Atlantique. Le pays de la Teranga regorge de sites dépaysants et uniques. 
@@ -223,7 +235,7 @@
                             Le lieu abrite la Vierge noire et différentes statues de Saints dans la grotte de Popenguine,
                             est préservé et attire chaque année de plus en plus de visiteurs.
                         </p>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </section>
@@ -259,79 +271,27 @@
                             <div class="hotel"><img class="w-100 mt-1 chambre" src="{{ asset($item->image_restaurant) }}" alt="Image"></div>
                             <div class="description-hotel">
                                 <p class="descriptions">{{$item->titre_restaurant}}</p>
-                                <div class="text-center"><a href="{{url('localisation-resto/')}}" class="btn btn-reserve">Plus d'informations</a></div>
+                                <div class="text-center"><a href="{{ route('localisation-resto', $item->id) }}" class="btn btn-reserve">{{ $item->button_link }}</a></div>
                             </div>
                         </div>
                     @endforeach
-                @else
-                    <div class="container-fluid container-donnee">
-                        <div class="donnee">Enregistrez des données</div> 
-                    </div>
                 @endif
         </section>
         <section class="tab-pane fade div-cadeau" id="pills-divertir" role="tabpanel" aria-labelledby="pills-divertir-tab">
-            <div class="row p-3 divertissement">
-                <div class="col-md-5 img-divertir"><img src="images/casino.jpg" alt="" class="w-100 img-div"></div>
-                <div class="col-md-7 ">
-                    <div class="text-divertir">
-                        <h4 class="titre-div">Casino Terrou Bi,Dakar</h4>
-                        <p class="desc-divertir">
-                            Le Casino Terrou-Bi c’est une salle de jeux au cadre feutré, à l'ambiance magique pour vos soirées d'exception. De la roulette anglaise à Ultimate Texas Poker, en passant par le Black Jack, le Stud-Poker, le Hold’em Poker, cet espace de jeu est spécialement conçu pour
-                            vous offrir une expérience inoubliable durant vos séjours ici au Sénégal. Le monde du jeu est à vous, avec un large choix pour un moment d’évasion unique.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="row p-3 pt-4 divertissement">
-                <div class="col-md-5 img-divertir"><img src="images/caption.jpg" alt="" class="w-100 img-div"></div>
-                <div class="col-md-7">
-                    <div class="text-divertir">
-                        <h4 class="titre-div">Le Désert Lompoul</h4>
-                        <p class="desc-divertir">
-                            Le désert de Lompoul est,une petite étendue désertique d’une superficie de 18 km2,
-                            situé aux confins de l’océan Atlantique, dans le Nord-Ouest du Sénégal entre Dakar, la capitale du pays de la Teranga, et Saint-Louis. Il est formé de dunes de sable atteignant parfois près de 50 mètres où la végétation est quasi inexistante.
-                            Une fois sur les lieux vous allez vivre des moments jovials en faisant de balade à pied et sandboarding, balade en dromadaire
-                            ,balade en 4x4, balade en quad, concourt de conduites sur des engins bien adapté à la situation, des tam-tams,etc.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="row p-3 pt-4 divertissement">
-                <div class="col-md-5 img-divertir"><img src="images/palmerie.jpg" alt="" class="w-100 img-div"></div>
-                <div class="col-md-7">
-                    <div class="text-divertir">
-                        <h4 class="titre-div">La Palmeraie Sporting Club, Saly Portudal, Thiés</h4>
-                        <p class="desc-divertir">
-                            Un complexe multisports regroupant 2 courts de Padel, des terrains de pétanques, foot à 5 sur gazon synthétique, salle de fitness, aquabike, andermologie LPG, Espace de soin esthétique, beach tennis, beach volley et aussi un espace kids.
-                            Nous vous accueillons 7 jours sur 7 pour partager des moments de convivialité dans une ambiance sportive et détendue au milieu des cocotiers. Vous aurez à disposition une infrastructure complète comprenant des vestiaires homme et femme, wc et douche.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="row p-3 pt-4 divertissement">
-                <div class="col-md-5 img-divertir"><img src="images/paintball.jpg" alt="" class="w-100 img-div"></div>
-                <div class="col-md-7">
-                    <div class="text-divertir">
-                        <h4 class="titre-div">Paintball, Parc Hann Dakar</h4>
-                        <p class="desc-divertir">
-                            Le paintball est une activité de team building où le cadre se trouve dans une faune variée et une végétation luxuriante.
-                            Pour participer à ce jeu le joueur devra louer le matériel nécessaire(qui sont ces équipements: le masque, le pistolet et son cartouche, combinaison intégrale et gants) pour sa sécurité et achéte le nombre de billes qu'il pourra utiliser.
-                            Le jeu se fait par deux équipes adverses et l'un élimine l'autre en les touchant avec des billes de peinture lancées par les lanceurs de paintball.  
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="row p-3 pt-4 divertissement">
-                <div class="col-md-5 img-divertir"><img src="images/magic-land.jpg" alt="" class="w-100 img-div"></div>
-                <div class="col-md-7">
-                    <div class="text-divertir">
-                        <h4 class="titre-div">Magic Land ,Dakar</h4>
-                        <p class="desc-divertir">
-                            Magic Land ne passe pas inaperçu sur la route de la Corniche. Face à Soumbédioune, couleurs, manèges, train fantôme et jeux aquatiques raviront petits et grands. Bienvenue dans le seul parc d'attractions de Dakar et, au-delà, de tout le Sénégal. Une agréable journée en perspective, le tout au bord de la mer. Le samedi soir, le parc
-                            se transforme régulièrement en lieu de concert. Possibilité d'aller au parc d'attractions et/ou à la piscine.
-                        </p>
-                    </div>
-                </div>
+            <div class="row m-3 divertissement">
+                @if(!$divertirs->isEmpty())
+                    @foreach($divertirs as $item)
+                        <div class="col-md-5 p-3 img-divertir"><img src="{{ asset($item->image_distraction) }}" alt="" class="w-100 img-div"></div>
+                        <div class="col-md-7 p-3">
+                            <div class="text-divertir">
+                                <h4 class="titre-div">{{$item->titre_distraction}}</h4>
+                                <p class="desc-divertir">
+                                    {{$item->description_distraction}}
+                                </p>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
             </div>
         </section>
         <section class="container mt-1 mb-5 tab-pane fade cadeau" id="pills-cadeau" role="tabpanel" aria-labelledby="pills-cadeau-tab">
@@ -339,132 +299,36 @@
                         <br><span class="text-center">pour acheter des cadeaux de vos choix.</span>
             </p>
             <div class="row">
-                <div class="col-md-6 mt-2">
-                    <div class="row mb-3 c-cad">
-                        <div class="col-md-8"><img src="images/kermel.jpg" alt="Une" class="w-100 cadeaux"></div>
-                        <div class="col-md-4 text-button">
-                            <h5 class="text-muted mt-2 mut">Marché Kermel</h5>
-                            <a href="/localisation-marche" class="btn btn-reserv">Plus d'informations</a>
+                @if(!$cadeaus->isEmpty())
+                    @foreach($cadeaus as $item)
+                        <div class="col-md-6 mt-2">
+                            <div class="row mb-3 c-cad">
+                                <div class="col-md-8"><img src="{{ asset($item->image_marche) }}" alt="" class="w-100 cadeaux"></div>
+                                <div class="col-md-4 text-button">
+                                    <h5 class="text-muted mt-2 mut">{{$item->titre_marche}}</h5>
+                                    <a href="{{ route('localisation-marche', $item->id) }}" class="btn btn-reserv">{{ $item->button_link }}</a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row mb-3 c-cad">
-                        <div class="col-md-8"><img src="images/helene.jpg" alt="Une" class="w-100 cadeaux"></div>
-                        <div class="col-md-4 text-button">
-                            <h5 class="text-muted mt-1 mut">Helene K la Boutique</h5>
-                            <a href="/localisation-marche" class="btn btn-reserv">Plus d'informations</a>
-                        </div>
-                    </div>
-                    <div class="row mb-3 c-cad">
-                        <div class="col-md-8"><img src="images/galerie.jpg" alt="Une" class="w-100 cadeaux"></div>
-                        <div class="col-md-4 text-button">
-                            <h5 class="text-muted mt-2 mut">Galerie KMG</h5>
-                            <a href="/localisation-marche" class="btn btn-reserv">Plus d'informations</a>
-                        </div>
-                    </div>
-                    <div class="row mb-3 c-cad">
-                        <div class="col-md-8"><img src="images/sandaga.jpg" alt="Une" class="w-100 cadeaux"></div>
-                        <div class="col-md-4 text-button">
-                            <h5 class="text-muted mt-2 mut">Marché Sandaga</h5>
-                            <a href="/localisation-marche" class="btn btn-reserv">Plus d'informations</a>
-                        </div>
-                    </div>
-                    <div class="row mb-3 c-cad">
-                        <div class="col-md-8"><img src="images/maamsamba.png" alt="Une" class="w-100 cadeaux"></div>
-                        <div class="col-md-4 text-button">
-                            <h5 class="text-muted mt-1 mut">Boutique Maam Samba</h5>
-                            <a href="/localisation-marche" class="btn btn-reserv">Plus d'informations</a>
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="col-md-6 mt-2">
-                    <div class="row mb-3 c-cad">
-                        <div class="col-md-8"><img src="images/village.jpg" alt="Une" class="w-100 cadeaux"></div>
-                        <div class="col-md-4 text-button">
-                            <h5 class="text-muted mt-1 mut">Soumbédioune</h5>
-                            <a href="/localisation-marche" class="btn btn-reserv">Plus d'informations</a>
-                        </div>
-                    </div>
-                    <div class="row mb-3 c-cad">
-                        <div class="col-md-8"><img src="images/village1.jpg" alt="Une" class="w-100 cadeaux"></div>
-                        <div class="col-md-4 text-button">
-                            <h5 class="text-muted mt-1 mut">Soumbédioune</h5>
-                            <a href="/localisation-marche" class="btn btn-reserv">Plus d'informations</a>
-                        </div>
-                    </div>
-                    <div class="row mb-3 c-cad">
-                        <div class="col-md-8"><img src="images/village2.jpg" alt="Une" class="w-100 cadeaux"></div>
-                        <div class="col-md-4 text-button">
-                            <h5 class="text-muted mt-1 mut">Soumbédioune</h5>
-                            <a href="/localisation-marche" class="btn btn-reserv">Plus d'informations</a>
-                        </div>
-                    </div>
-                    <div class="row mb-3 c-cad">
-                        <div class="col-md-8"><img src="images/village3.jfif" alt="Une" class="w-100 cadeaux"></div>
-                        <div class="col-md-4 text-button">
-                            <h5 class="text-muted mt-1 mut">Soumbédioune</h5>
-                            <a href="/localisation-marche" class="btn btn-reserv">Plus d'informations</a>
-                        </div>
-                    </div>
-                    <div class="row mb-3 c-cad">
-                        <div class="col-md-8"><img src="images/ngay.jfif" alt="Une" class="w-100 cadeaux"></div>
-                        <div class="col-md-4 text-button">
-                            <h5 class="text-muted mt-2 mut">Ngay Mékhé</h5>
-                            <a href="/localisation-marche" class="btn btn-reserv">Plus d'informations</a>
-                        </div>
-                    </div>
-                </div>
+                    @endforeach
+                @endif
             </div>
         </section>
         <section class="mb-5 mt-4 tab-pane fade cont" id="pills-bouger" role="tabpanel" aria-labelledby="pills-bouger-tab">
             <div class="container mb-5">
                 <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
-                        <div class="carousel-item active" data-bs-interval="10000">
-                            <img src="images/lutte.webp" class="d-block w-100 img-pop" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>La lutte</h5>
-                                <p>La lutte est, le sport national du Sénégal, un sport de contact et elle intégre aussi la box.
-                                    La lutte est organisée par des promoteurs dans les stades ou à la mer </p>
-                            </div>
-                        </div>
-                        <div class="carousel-item" data-bs-interval="2000">
-                            <img src="images/kankourang.jfif" class="d-block w-100 img-pop" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Kankourang</h5>
-                                <p>La fête du kankourang démarre le mois de Septembre et dure trois mois au rythme de la fête de la circoncision chez les Mandingues.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="images/lebou.jpg" class="d-block w-100 img-pop" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Ndawrabine</h5>
-                                <p>C'est une danse traditionnelle avec des costumes multicolores. Les femmes font des tatouages, portent des perruques traditionnelles, forment colonnes, chantent et dansent au son des tams-tams.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="images/signare.jpg" class="d-block w-100 img-pop" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Les Signares</h5>
-                                <p>Les fanals de Saint-Louis se déroulent chaque année, la dernière semaine de décembre sur la place Faidherbe et les rues adjacentes. Entre danses, percussions, défilé 
-                                    des Signares et de fanals, cette parade traditionnelle retrace l’histoire de la ville de Ndar/Saint-Louis.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="images/popenguin.jpg" class="d-block w-100 img-pop" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Les atéliers de peintures et de poteries</h5>
-                                <p> La galerie Diwali à Saint-Louis ou encore le Poppin’ Popenguine, où vous pourrez 
-                                    vous initier à la danse, à la capoeira, au yoga, aux ateliers de maquillage et bien d’autres activités encore.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="images/balade.jpg" class="d-block w-100 img-pop" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Balade au tour du lac rose</h5>
-                                <p>Faites de balade en amoureux ou en amitié en conduisants des motos</p>
-                            </div>
-                        </div>
+                        @if(!$bougers->isEmpty())
+                            @foreach($bougers as $item)
+                                <div class="carousel-item active" data-bs-interval="10000">
+                                    <img src="{{ asset($item->image_bouger) }}" class="d-block w-100 img-pop" alt="...">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>{{$item->titre_bouger}}</h5>
+                                        <p>{{$item->description_bouger}} </p>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
                     </div>
                     <div class="carousel-indicators position-static">
                         <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -475,6 +339,7 @@
                         <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="5" aria-label="Slide 6"></button>
                     </div>
                 </div>
+            
             </div>
         </section>
     </section>

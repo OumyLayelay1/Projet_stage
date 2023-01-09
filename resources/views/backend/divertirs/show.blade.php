@@ -14,7 +14,9 @@
                     <table class="container-fluid table table-striped">
                         <tr>
                             <th>Image :</th>
-                            <td>{{ $divertir->image_distraction }}</td>
+                            <td>
+                                <img class="image-show" src="{{ asset($divertir->image_distraction) }}" alt="Image">
+                            </td>
                         </tr>
                         <tr>
                             <th>Titre :</th>

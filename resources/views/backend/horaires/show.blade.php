@@ -18,11 +18,11 @@
                         </tr>
                         <tr>
                             <th>Heure ouverture :</th>
-                            <td>{{ $horaire->heure_ouverture}}</td>
+                            <td>{{ $horaire->heure_ouvertur}}</td>
                         </tr>
                         <tr>
                             <th>Heure fermeture :</th>
-                            <td>{{$horaire->heure_fermeture}}</td>
+                            <td>{{$horaire->heure_fermetur}}</td>
                         </tr>
                         <tr>
                             <th>Fermé :</th>

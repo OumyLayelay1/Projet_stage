@@ -44,7 +44,7 @@ Route::get('/reserve', [FrontendController::class, 'reserve'])->name('reserve');
 Route::get('/langue', [FrontendController::class, 'langue'])->name('langue');
 Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
 Route::post('/contact', [FrontendController::class, 'contactSend'])->name('contact');
-Route::get('/countries',[CountryController::class, 'view']);
+//Route::get('/countries',[CountryController::class, 'view']);
 
 Route::group(['middleware' => 'auth'], function(){
     Route::resource('/restos', RestoController::class);

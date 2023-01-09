@@ -6,12 +6,12 @@
                 @include('backend.aside.aside')
                 <div class="col-md-9 pt-4 backend-page-col">
                     <div class="entete">
-                        <h3 class="text-light entete-1">Show Slider
+                        <h3 class="text-light entete-1">Edit Slider
                             <a href="{{url('sliders')}}" class="btn btn-light">Retour</a>
                         </h3> 
                     </div>
                     <div class="container-form">
-                        <form action="{{route('sliders.update', $slider->id)}}" method="post">
+                        <form enctype="multipart/form-data" action="{{route('sliders.update', $slider->id)}}" method="post">
                              @csrf
                              @method('PUT')
 
@@ -21,9 +21,9 @@
                             </div>
                             <div class="mb-3">
                                 <label for="slider_image" class="form-label">Image</label>
-                                <input type="file" name="slider_image" value="{{$slider->slider_image}}" class="form-control" id="slider_image" placeholder="">
+                                <input type="file" name="slider_image" class="form-control" id="slider_image" placeholder="">
                                 <div class="img-preview">
-                                    <img width="100" height="100" src="{{ asset($slider->slider_image) }}" alt="">
+                                    <img class="image-create" src="{{ asset($slider->slider_image) }}" alt="">
                                 </div>
                             </div>
                             <div class="mb-3">
